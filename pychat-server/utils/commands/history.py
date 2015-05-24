@@ -36,7 +36,6 @@ class HistoryCommand(Command):
             })
 
         collection = self.db.messages
-        print doc
 
         return collection.find(doc).addCallback(self.processResults)
 
