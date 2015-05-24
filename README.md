@@ -3,6 +3,8 @@ pychat-server
 
 Simple twisted-based chat server supporting multiple users and rooms.
 
+To launch, type `twistd -y main.py`, to stop `kill $(cat twistd.pid)`
+
 
 ## Protocol documentation
 
