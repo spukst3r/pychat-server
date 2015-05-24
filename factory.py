@@ -10,9 +10,3 @@ class ChatServerFactory(protocol.ServerFactory):
     def __init__(self):
         self.users = {}
         self.commands = getCommands('utils/commands')
-
-    def addUser(self, user):
-        if user.name in self.users:
-            pass
-        else:
-            pass
