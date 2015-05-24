@@ -22,3 +22,13 @@ class ChatUser(object):
 
         self.room.removeUser(self.name)
         self.room = None
+
+    def tearDown(self):
+        if self.room:
+            self.leaveRoom()
+
+    def __repr__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name

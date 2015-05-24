@@ -8,10 +8,14 @@ class ChatServerProtocol(basic.LineReceiver):
     def connectionMade(self):
         self.user = ChatUser(None, self.transport)
 
+    def connectionLost(self, reason):
+        # TODO: notify other users in the room about disconnecting
+        self.user.tearDown()
+
     def lineReceived(self, line):
         Command, args = self.getCommand(line)
 
-        command = Command(self.user)
+        command = Command(self.user, self.factory.db)
         d = command.run(args)
 
         def success(reply):
