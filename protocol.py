@@ -15,12 +15,22 @@ class ChatServerProtocol(basic.LineReceiver):
         d = command.run(args)
 
         def success(reply):
-            self.transport.write(reply + '\n\r')
+            result = {
+                'result': reply,
+                'type': 'commandResult',
+            }
+
+            self.transport.write(json.dumps(result))
 
             map(self.sendMessage, command.messageQueue)
 
         def fail(f):
-            self.transport.write(f.getErrorMessage() + '\n\r')
+            result = {
+                'error': f.getErrorMessage(),
+                'type': 'error',
+            }
+
+            self.transport.write(json.dumps(result))
 
         d.addCallback(success)
         d.addErrback(fail)

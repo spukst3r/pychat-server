@@ -7,7 +7,16 @@ class LeaveRoomCommand(Command):
     @loginRequired
     @joinedRoomRequired
     def _run(self, *args):
+        room = self.user.room
+
         self.user.leaveRoom()
+
+        map(lambda user: self.sendMessage({
+            'from': self.user,
+            'to': user,
+            'type': "userLeft",
+            'body': "User {} has left the room".format(self.user.name)
+        }), room.users.values())
 
         return "OK"
 
