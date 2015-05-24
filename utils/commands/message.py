@@ -1,17 +1,13 @@
-from utils import Command
+from utils import Command, joinedRoomRequired, loginRequired
 
 
 class MessageCommand(Command):
     names = ('MESSAGE',)
     default = True
 
+    @loginRequired
+    @joinedRoomRequired
     def _run(self, *args):
-        if not self.user.name:
-            raise Exception("Login required")
-
-        if not self.user.room:
-            raise Exception("Join a room first")
-
         try:
             message = args[0]
         except IndexError:

@@ -1,13 +1,11 @@
-from utils import Command
+from utils import Command, loginRequired
 
 
 class JoinRoomCommand(Command):
     names = ('JOIN ROOM', 'JOIN')
 
+    @loginRequired
     def _run(self, *args):
-        if not self.user.name:
-            raise Exception("Login required")
-
         try:
             roomName = args[0]
         except IndexError:

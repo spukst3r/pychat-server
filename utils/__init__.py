@@ -26,6 +26,26 @@ class Command(object):
         raise NotImplementedError()
 
 
+def loginRequired(func):
+    def wrapper(self, *args, **kwargs):
+        if not self.user.name:
+            raise Exception("Login required")
+
+        return func(self, *args, **kwargs)
+
+    return wrapper
+
+
+def joinedRoomRequired(func):
+    def wrapper(self, *args, **kwargs):
+        if not self.user.room:
+            raise Exception("Join a room first")
+
+        return func(self, *args, **kwargs)
+
+    return wrapper
+
+
 def getCommands(directory):
     def registerCommand(args):
         importer, package_name, _ = args
