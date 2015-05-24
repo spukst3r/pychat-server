@@ -10,6 +10,10 @@ class ChatUser(object):
     def joinRoom(self, roomName):
         room = getRoom(roomName)
 
+        if self.name in room.users:
+            raise Exception("User with such nickname is already present in "
+                            "the requested room")
+
         if self.room:
             self.leaveRoom()
 
