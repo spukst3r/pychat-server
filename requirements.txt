@@ -1,0 +1,2 @@
+Twisted==15.2.0
+txmongo==15.0.0
