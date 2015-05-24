@@ -17,11 +17,15 @@ class MessageCommand(Command):
         except IndexError:
             raise Exception("Missing required parameter")
 
-        def sendMessage(user):
-            message
-            pass
+        def send(user):
+            self.sendMessage({
+                'to': user,
+                'from': self.user,
+                'body': message,
+                'type': 'message',
+            })
 
-        map(sendMessage, self.user.room.users)
+        map(send, self.user.room.users.values())
 
         return "OK"
 

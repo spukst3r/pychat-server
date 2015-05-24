@@ -11,12 +11,16 @@ class Command(object):
 
     def __init__(self, user):
         self.user = user
+        self.messageQueue = []
 
     @defer.inlineCallbacks
     def run(self, *args):
         result = yield self._run(*args)
 
         defer.returnValue(result)
+
+    def sendMessage(self, msg):
+        self.messageQueue.append(msg)
 
     def _run(self, *args):
         raise NotImplementedError()

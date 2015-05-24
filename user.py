@@ -2,9 +2,9 @@ from room import getRoom
 
 
 class ChatUser(object):
-    def __init__(self, name):
+    def __init__(self, name, transport):
         self.name = name
-        self.rooms = {}
+        self.transport = transport
         self.room = None
 
     def joinRoom(self, roomName):
@@ -14,7 +14,6 @@ class ChatUser(object):
             self.leaveRoom()
 
         room.addUser(self)
-        self.rooms[roomName] = room
         self.room = room
 
     def leaveRoom(self):
@@ -22,6 +21,4 @@ class ChatUser(object):
             raise Exception("No room to leave")
 
         self.room.removeUser(self.name)
-        self.rooms.pop(self.room.name)
-
         self.room = None

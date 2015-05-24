@@ -2,7 +2,7 @@ from utils import Command
 
 
 class JoinRoomCommand(Command):
-    names = ('JOIN ROOM',)
+    names = ('JOIN ROOM', 'JOIN')
 
     def _run(self, *args):
         if not self.user.name:
