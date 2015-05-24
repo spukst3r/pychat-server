@@ -31,5 +31,15 @@ class LoginCommand(Command):
         return "Username set to {}".format(self.user.name)
 
 
+def loginRequired(func):
+    def wrapper(self, *args, **kwargs):
+        if not self.user.name:
+            raise Exception("Login required")
+
+        return func(self, *args, **kwargs)
+
+    return wrapper
+
+
 def mapping():
     return (LoginCommand.names, LoginCommand)

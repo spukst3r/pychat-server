@@ -1,4 +1,5 @@
-from utils import Command, loginRequired
+from utils import Command
+from utils.commands.login import loginRequired
 
 
 class JoinRoomCommand(Command):
@@ -21,6 +22,16 @@ class JoinRoomCommand(Command):
         }), self.user.room.users.values())
 
         return "Joined room {}".format(self.user.room.name)
+
+
+def joinedRoomRequired(func):
+    def wrapper(self, *args, **kwargs):
+        if not self.user.room:
+            raise Exception("Join a room first")
+
+        return func(self, *args, **kwargs)
+
+    return wrapper
 
 
 def mapping():

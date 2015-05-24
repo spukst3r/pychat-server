@@ -1,4 +1,6 @@
-from utils import Command, loginRequired, joinedRoomRequired
+from utils import Command
+from utils.commands.join_room import joinedRoomRequired
+from utils.commands.login import loginRequired
 
 
 class LeaveRoomCommand(Command):
