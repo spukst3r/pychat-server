@@ -26,7 +26,6 @@ class ChatServerProtocol(basic.LineReceiver):
         d.addErrback(fail)
 
     def sendMessage(self, msg):
-        print "sendMessage({})".format(msg)
         msg['to'].transport.write(json.dumps({
             'from': msg['from'].name,
             'type': msg['type'],
